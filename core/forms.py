@@ -2,6 +2,7 @@ from django.utils import timezone
 from django import forms
 
 from .models import FileModel
+from finance.models import FinanceModel
 
 
 class FileForm(forms.ModelForm):
