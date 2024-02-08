@@ -1,5 +1,6 @@
 import csv
 from datetime import datetime
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 
 from django.views.generic import TemplateView, CreateView
@@ -21,31 +22,40 @@ def upload_file(request):
     if request.method == "POST":
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
-            csv_file = request.FILES["file"].read().decode("latin-1").splitlines()
-            csv_reader = csv.DictReader(csv_file, delimiter=";")
+            csv_file = request.FILES.get("file")
+            file_type = request.POST.get("type")
 
-            for row in csv_reader:
+            if not csv_file:
+                return HttpResponseBadRequest("Missing file")
 
-                date_op = datetime.strptime(
-                    row["TO_DATE(DATE_OPERATION)"], "%d/%m/%Y %H:%M"
-                ).date()
+            if file_type == "BudgetFile":
 
-                mt_engag = float("".join(filter(str.isdigit, row["MT_ENGAGEMENT"])))
-                mt_recep = float("".join(filter(str.isdigit, row["MT_RECEPTION"])))
-
-                FinanceModel.objects.create(
-                    date_operation=date_op,
-                    reception=row["RECEPTION"],
-                    engagement=row["ENGAG"],
-                    fournisseur=row["FOURNISSEUR"],
-                    shipment_num=row["SHIPMENT_NUM"],
-                    devise=row["DEVISE"],
-                    receptionnaire=row["RECEPTIONNAIRE"],
-                    mt_engagement=mt_engag,
-                    objet=row["OBJET"],
-                    mt_reception=mt_recep,
+                csv_reader = csv.DictReader(
+                    csv_file.read().decode("latin-1").splitlines(), delimiter=";"
                 )
-            form.save()
+
+                for row in csv_reader:
+
+                    date_op = datetime.strptime(
+                        row["TO_DATE(DATE_OPERATION)"], "%d/%m/%Y %H:%M"
+                    ).date()
+
+                    mt_engag = float("".join(filter(str.isdigit, row["MT_ENGAGEMENT"])))
+                    mt_recep = float("".join(filter(str.isdigit, row["MT_RECEPTION"])))
+
+                    FinanceModel.objects.create(
+                        date_operation=date_op,
+                        reception=row["RECEPTION"],
+                        engagement=row["ENGAG"],
+                        fournisseur=row["FOURNISSEUR"],
+                        shipment_num=row["SHIPMENT_NUM"],
+                        devise=row["DEVISE"],
+                        receptionnaire=row["RECEPTIONNAIRE"],
+                        mt_engagement=mt_engag,
+                        objet=row["OBJET"],
+                        mt_reception=mt_recep,
+                    )
+                form.save()
 
     else:
         form = FileForm()
