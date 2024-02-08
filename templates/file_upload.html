@@ -1,0 +1,24 @@
+{% extends "_base.html" %} 
+
+
+{% block content %}
+<h1>New File</h1>
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">File Upload</div>
+      <div class="panel-body">
+        {% if error_message %}
+        <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+        {% endif %}
+        <div class="col-md-6 col-md-offset-4">
+          {{ form }}
+          <br />
+          <button type="submit">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock content %}

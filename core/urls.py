@@ -1,7 +1,8 @@
 from django.urls import path
 
-from .views import HomePageView
+from . import views
 
 urlpatterns = [
-    path("", HomePageView.as_view(), name="home"),
+    path("", views.home, name="home"),
+    path("fileupload", views.upload_file, name="file_upload"),
 ]
