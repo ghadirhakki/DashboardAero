@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class ProjectModel(models.Model):
-    reference = models.CharField(max_length=20)
+    reference = models.CharField(max_length=20)  ## should be format : MA_0321/09
     name = models.CharField(max_length=80, blank=True)
     start = models.DateField()
     end = models.DateField()
