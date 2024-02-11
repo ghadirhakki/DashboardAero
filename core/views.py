@@ -2,12 +2,19 @@ import csv
 from datetime import datetime
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render
-
-from django.views.generic import TemplateView, CreateView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from core.forms import FileForm
-from finance.models import FinanceModel
-from planning.models import PhaseModel, ProjectModel, TaskModel
+from finance.models import FinanceModel, FinanceModelSerializer
+from planning.models import (
+    PhaseModel,
+    PhaseModelSerializer,
+    ProjectModel,
+    ProjectModelSerializer,
+    TaskModel,
+    TaskModelSerializer,
+)
 
 # Create your views here.
 
@@ -42,13 +49,15 @@ def upload_file(request):
                         row["TO_DATE(DATE_OPERATION)"], "%d/%m/%Y %H:%M"
                     ).date()
 
+                    eng = row["ENGAG"].replace("/", "_").replace(" ", "")
+
                     mt_engag = float("".join(filter(str.isdigit, row["MT_ENGAGEMENT"])))
                     mt_recep = float("".join(filter(str.isdigit, row["MT_RECEPTION"])))
 
                     FinanceModel.objects.create(
                         date_operation=date_op,
                         reception=row["RECEPTION"],
-                        engagement=row["ENGAG"],
+                        engagement=eng,
                         fournisseur=row["FOURNISSEUR"],
                         shipment_num=row["SHIPMENT_NUM"],
                         devise=row["DEVISE"],
@@ -100,3 +109,52 @@ def upload_file(request):
         form = FileForm()
 
     return render(request, "file_upload.html", {"form": form})
+
+
+def dir_dashboard(request):
+    if request.method == "GET":
+        all_projects = ProjectModel.objects.all()
+    return render(request, "dashboards/dir_dash.html", {"all_projects": all_projects})
+
+
+@api_view()
+def proj_list(request):
+    if request.method == "GET":
+        all_projects = ProjectModel.objects.all()
+        serializer = ProjectModelSerializer(all_projects, many=True)
+        return Response(serializer.data)
+
+
+@api_view()
+def phases_per_proj(request, ref):
+    if request.method == "GET":
+        project_phases = PhaseModel.objects.filter(project_related__reference=ref)
+        serializer = PhaseModelSerializer(project_phases, many=True)
+        return Response(serializer.data)
+
+
+@api_view()
+def tasks_per_phase(request, ref):
+    if request.method == "GET":
+        project_phases = PhaseModel.objects.filter(project_related__reference=ref)
+        phase_serializer = PhaseModelSerializer(project_phases, many=True)
+        phase_tasks = TaskModel.objects.filter(project_related__reference=ref)
+        task_serializer = TaskModelSerializer(phase_tasks, many=True)
+        response_data = {"phases": phase_serializer.data, "tasks": task_serializer.data}
+        return Response(response_data)
+
+
+@api_view()
+def financial_records_list(request):
+    if request.method == "GET":
+        records = FinanceModel.objects.all()
+        serializer = FinanceModelSerializer(records, many=True)
+        return Response(serializer.data)
+
+
+@api_view()
+def financial_records_per_proj(request, ref):
+    if request.method == "GET":
+        records = FinanceModel.objects.filter(engagement=ref)
+        serializer = FinanceModelSerializer(records, many=True)
+        return Response(serializer.data)

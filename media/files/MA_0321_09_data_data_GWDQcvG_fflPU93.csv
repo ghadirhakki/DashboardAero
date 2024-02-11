@@ -1,0 +1,101 @@
+TO_DATE(DATE_OPERATION);RECEPTION;ENGAG;FOURNISSEUR;SHIPMENT_NUM;DEVISE;RECEPTIONNAIRE;MT_ENGAGEMENT;OBJET;MT_RECEPTION
+24/05/2018 00:00;4959;MA_0113/17  /  ;Fournisseur 2;DP-01;MAD;Chef projet 1;123.456.789;Marché 1;49.382.715,60
+24/05/2018 00:00;4960;MA_0311/18  /  ;fournisseur 3;;MAD;chef Projet 2;123.456;Marché 2;49.382,40
+25/05/2018 00:00;4964;MA_0255/09  /  ;Fournisseur 4;;MAD;Chef projet 3;345.678;Marché 3;138.271,20
+25/05/2018 00:00;4965;MA_0080/14  /  ;Fournisseur 5;;MAD;Chef projet 4;8.765.432;Marché 4;3.506.172,80
+29/05/2018 00:00;4967;MA_0075/17  /  ;Fournisseur 6;;EUR;Chef projet 5;34.567.890;Marché 5;13.827.156,00
+30/05/2018 00:00;4966;MA_00159/16  /  ;Fournisseur 7;;MAD;Chef projet 6;12.345;Marché 6;4.938,00
+30/05/2018 00:00;4968;MA_0166/09  /  ;Fournisseur 8;;MAD;Chef projet 7;1.234.567;Marché 7;493.826,80
+01/06/2018 00:00;4970;MA_0076/17  /  ;Fournisseur 9;;MAD;Chef projet 8;12.345.678;Marché 8;4.938.271,20
+04/06/2018 00:00;4966;MA_00159/16  /  ;Fournisseur 10;;MAD;Chef projet 9;123.456.789;Marché 9;49.382.715,60
+06/06/2018 00:00;4578;MA_0176/14  /  ;Fournisseur 11;NH 2;MAD;Chef projet 10;123.456;Marché 10;49.382,40
+06/06/2018 00:00;4883;MA_0311/15  /  ;Fournisseur 12;;MAD;Chef projet 11;345.678;Marché 11;138.271,20
+06/06/2018 00:00;4971;MA_0111/16  /  ;Fournisseur 13;;MAD;Chef projet 12;8.765.432;Marché 12;3.506.172,80
+06/06/2018 00:00;4972;MA_0067/16  /  ;Fournisseur 14;DP 3;MAD;Chef projet 13;34.567.890;Marché 13;13.827.156,00
+06/06/2018 00:00;4973;MA_0060/16  /  ;Fournisseur 15;DP 3;MAD;Chef projet 14;12.345;Marché 14;4.938,00
+06/06/2018 00:00;4974;MA_0065/15  /  ;Fournisseur 16;NH N°5;MAD;Chef projet 15;123.456;Marché 15;49.382,40
+06/06/2018 00:00;4975;MA_0262/15  /  ;Fournisseur 17;NH 3;MAD;Chef projet 16;345.678;Marché 16;138.271,20
+06/06/2018 00:00;4976;MA_0175/16  /  ;Fournisseur 18;DP  1;MAD;Chef projet 17;8.765.432;Marché 17;3.506.172,80
+06/06/2018 00:00;4977;MA_0175/16  /  ;Fournisseur 19;DP 2;MAD;Chef projet 18;34.567.890;Marché 18;13.827.156,00
+06/06/2018 00:00;4979;MA_0354/15  /  ;Fournisseur 20;;MAD;Chef projet 19;12.345;Marché 19;4.938,00
+07/06/2018 00:00;4936;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;2.217.261,90
+20/05/2019 00:00;5307;MA_0177/17  /  ;Fournisseur 21;;MAD;Chef projet 12;123.456.789;Marché 20;61.728,00
+21/05/2019 00:00;5309;MA_0005/07  /  ;Fournisseur 22;NH  3;MAD;Chef projet 13;123.456;marché 21;172.839,00
+22/05/2019 00:00;5310;MA_0178/17  /  ;Fournisseur 23;;MAD;Chef projet 14;345.678;Marché 22;4.382.716,00
+24/05/2019 00:00;5308;MA_0197/17  /  ;Fournisseur 24;;MAD;Chef projet 15;8.765.432;Marché 23;17.283.945,00
+27/05/2019 00:00;5311;MA_0100/11  /  ;Fournisseur 25;;MAD;Chef projet 16;34.567.890;Marché 24;6.172,50
+27/05/2019 00:00;5312;MA_0100/11  /  ;Fournisseur 26;;MAD;Chef projet 17;12.345;Marché 25;61.728,00
+28/05/2019 00:00;5313;MA_0026/08  /  ;Fournisseur 27;HN  N° 20;MAD;Chef projet 18;123.456;Marché 26;172.839,00
+28/05/2019 00:00;5314;MA_0176/14  /  ;Fournisseur 28;NH N° 4;MAD;Chef projet 19;345.678;Marché 27;4.275.000,00
+29/05/2019 00:00;5315;MA_0161/08  /  ;Fournisseur 29;PVRD;MAD;Chef projet 20;8.550.000;Marché 28;70.000.000,00
+30/05/2019 00:00;5318;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;26.015.425,70
+30/05/2019 00:00;5320;MA_0178/17  /  ;Fournisseur 30;;MAD;Chef projet 13;123.456;Marché 29;74.073,60
+30/05/2019 00:00;5320;MA_0178/17  /  ;Fournisseur 31;;MAD;Chef projet 14;345.678;Marché 30;207.406,80
+03/06/2019 00:00;5321;MA_0159/18  /  ;Fournisseur 32;;MAD;Chef projet 15;8.765.432;Marché 31;5.259.259,20
+03/06/2019 00:00;5323;MA_0028/12  /  ;Fournisseur 33;;MAD;Chef projet 16;34.567.890;Marché 32;20.740.734,00
+04/06/2019 00:00;5324;MA_0187/17  /  ;Fournisseur 34;;MAD;Chef projet 14;12.345;Marché 33;7.407,00
+12/06/2019 00:00;5325;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;1.279.761,90
+24/12/2019 00:00;5465;MA_0006/08  /  ;Fournisseur 34;FAC 14/19;MAD;Chef projet 15;123.456.789;Marché 65;285.310,77
+24/12/2019 00:00;5466;MA_0206/06  /  ;Fournisseur 35;FACT 13-19;MAD;Chef projet 16;123.456;Marché 66;106.273,65
+24/12/2019 00:00;5467;MA_0266/18  /  ;Fournisseur 36;;MAD;Chef projet 17;345.678;Marché 67;661.500,00
+24/12/2019 00:00;5468;MA_0052/07  /  ;Fournisseur 37;FAC DU 23-12-19;MAD;Chef projet 18;8.765.432;Marché 68;53.480,00
+24/12/2019 00:00;5469;MA_0065/15  /  ;Fournisseur 38;NH  7;MAD;Chef projet 19;34.567.890;Marché 69;829.179,67
+25/12/2019 00:00;5455;MA_0291/18  /  ;Fournisseur 39;;MAD;Chef projet 20;12.345;Marché 70;982.637,85
+25/12/2019 00:00;5472;MA_0189/18  /  ;Fournisseur 40;;MAD;Chef projet 15;123.456;Marché 71;1.272.104,16
+26/12/2019 00:00;5473;MA_0251/18  /  ;Fournisseur 41;;MAD;Chef projet 16;345.678;Marché 72;3.733.821,00
+30/12/2019 00:00;5476;MA_0212/14  /  ;Fournisseur 42;;MAD;Chef projet 17;123.456;Marché 73;24.500,00
+30/12/2019 00:00;5477;MA_0195/17  /  ;Fournisseur 43;;USD;Chef projet 18;12.345;Marché 74;568.680,00
+30/12/2019 00:00;5478;MA_0200/17  /  ;Fournisseur 44;;USD;Chef projet 19;123.456;Marché 75;75.244,40
+02/01/2020 00:00;5470;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;5.250.080,83
+02/01/2020 00:00;5470;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;551.087,95
+13/04/2020 00:00;5556;MA_0014/19  /  ;Fournisseur 43;;MAD;Chef projet 20;12.345;Marché 74;1.272.104,16
+13/04/2020 00:00;5557;MA_0302/18  /  ;Fournisseur 44;;MAD;Chef projet 15;123.456;Marché 75;3.733.821,00
+13/04/2020 00:00;5558;MA_0280/18  /  ;Fournisseur 45;;MAD;Chef projet 16;345.678;Marché 76;24.500,00
+13/04/2020 00:00;5559;MA_0132/19  /  ;Fournisseur 46;;MAD;Chef projet 17;123.456;Marché 77;568.680,00
+14/04/2020 00:00;5560;MA_0028/12  /  ;Fournisseur 47;;MAD;Chef projet 18;12.345;Marché 78;75.244,40
+15/04/2020 00:00;5561;MA_0004/19  /  ;Fournisseur 48;;MAD;Chef projet 19;123.456;Marché 79;75.244,40
+15/04/2020 00:00;5562;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;532.542,94
+15/04/2020 00:00;5563;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;663.854,90
+15/04/2020 00:00;5564;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;663.854,90
+15/04/2020 00:00;5566;MA_0176/17  /  ;BAYANAT AIRPORTS ENGINEERING & SUPPLIES Co.LLC;;MAD;Chef projet 16;34.567.890;marché 80;829.179,67
+16/04/2020 00:00;5567;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;663.854,90
+28/07/2020 00:00;5623;MA_0028/12  /  ;Fournisseur 46;;MAD;Chef projet 17;123.456;Marché 77;568.680,00
+29/07/2020 00:00;5624;MA_0280/18  /  ;Fournisseur 47;;MAD;Chef projet 18;12.345;Marché 78;75.244,40
+06/08/2020 00:00;5625;MA_0090/19  /  ;Fournisseur 48;;MAD;Chef projet 19;123.456;Marché 79;75.244,40
+07/08/2020 00:00;5626;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;663.854,90
+13/11/2020 00:00;5642;MA_0221/09_MAD  /  ;Fournisseur 45;;MAD;Chef projet 16;345.678;Marché 76;24.500,00
+13/11/2020 00:00;5644;MA_0077/17  /  ;Fournisseur 46;;MAD;Chef projet 17;123.456;Marché 77;24.500,00
+13/11/2020 00:00;5669;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;663.854,90
+08/01/2021 00:00;5725;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;663.854,90
+20/04/2021 00:00;5783;MA_0321/09  /  ;Fournisseur 1;;MAD;Chef de projet 13;140.000.000;STB Terminal 1 Casablanca;663.854,90
+24/05/2021 00:00;4959;MA_0113/17  /  ;Fournisseur 2;DP-01;MAD;Chef projet 1;123.456.789;Marché 1;49.382.715,60
+24/05/2021 00:00;4960;MA_0311/18  /  ;fournisseur 3;;MAD;chef Projet 2;123.456;Marché 2;49.382,40
+24/05/2021 00:00;4964;MA_0255/09  /  ;Fournisseur 4;;MAD;Chef projet 3;345.678;Marché 3;138.271,20
+24/05/2021 00:00;4965;MA_0080/14  /  ;Fournisseur 5;;MAD;Chef projet 4;8.765.432;Marché 4;3.506.172,80
+24/05/2021 00:00;4967;MA_0075/17  /  ;Fournisseur 6;;EUR;Chef projet 5;34.567.890;Marché 5;13.827.156,00
+24/05/2021 00:00;4966;MA_00159/16  /  ;Fournisseur 7;;MAD;Chef projet 6;12.345;Marché 6;4.938,00
+24/05/2021 00:00;4968;MA_0166/09  /  ;Fournisseur 8;;MAD;Chef projet 7;1.234.567;Marché 7;493.826,80
+24/05/2021 00:00;4970;MA_0076/17  /  ;Fournisseur 9;;MAD;Chef projet 8;12.345.678;Marché 8;4.938.271,20
+24/05/2021 00:00;4966;MA_00159/16  /  ;Fournisseur 10;;MAD;Chef projet 9;123.456.789;Marché 9;49.382.715,60
+24/05/2021 00:00;4578;MA_0176/14  /  ;Fournisseur 11;NH 2;MAD;Chef projet 10;123.456;Marché 10;49.382,40
+24/05/2021 00:00;4883;MA_0311/15  /  ;Fournisseur 12;;MAD;Chef projet 11;345.678;Marché 11;138.271,20
+24/05/2021 00:00;4971;MA_0111/16  /  ;Fournisseur 13;;MAD;Chef projet 12;8.765.432;Marché 12;3.506.172,80
+24/05/2021 00:00;4972;MA_0067/16  /  ;Fournisseur 14;DP 3;MAD;Chef projet 13;34.567.890;Marché 13;13.827.156,00
+24/05/2021 00:00;4973;MA_0060/16  /  ;Fournisseur 15;DP 3;MAD;Chef projet 14;12.345;Marché 14;4.938,00
+24/05/2021 00:00;4974;MA_0065/15  /  ;Fournisseur 16;NH N°5;MAD;Chef projet 15;123.456;Marché 15;49.382,40
+24/05/2021 00:00;4975;MA_0262/15  /  ;Fournisseur 17;NH 3;MAD;Chef projet 16;345.678;Marché 16;138.271,20
+24/05/2021 00:00;4976;MA_0175/16  /  ;Fournisseur 18;DP  1;MAD;Chef projet 17;8.765.432;Marché 17;3.506.172,80
+24/05/2021 00:00;4977;MA_0175/16  /  ;Fournisseur 19;DP 2;MAD;Chef projet 18;34.567.890;Marché 18;13.827.156,00
+24/05/2021 00:00;4979;MA_0354/15  /  ;Fournisseur 20;;MAD;Chef projet 19;12.345;Marché 19;4.938,00
+24/05/2021 00:00;5465;MA_0006/08  /  ;Fournisseur 34;FAC 14/19;MAD;Chef projet 15;123.456.789;Marché 65;285.310,77
+24/05/2021 00:00;5466;MA_0206/06  /  ;Fournisseur 35;FACT 13-19;MAD;Chef projet 16;123.456;Marché 66;106.273,65
+24/05/2021 00:00;5467;MA_0266/18  /  ;Fournisseur 36;;MAD;Chef projet 17;345.678;Marché 67;661.500,00
+24/05/2021 00:00;5468;MA_0052/07  /  ;Fournisseur 37;FAC DU 23-12-19;MAD;Chef projet 18;8.765.432;Marché 68;53.480,00
+24/05/2021 00:00;5469;MA_0065/15  /  ;Fournisseur 38;NH  7;MAD;Chef projet 19;34.567.890;Marché 69;829.179,67
+24/05/2021 00:00;5455;MA_0291/18  /  ;Fournisseur 39;;MAD;Chef projet 20;12.345;Marché 70;982.637,85
+24/05/2021 00:00;5472;MA_0189/18  /  ;Fournisseur 40;;MAD;Chef projet 15;123.456;Marché 71;1.272.104,16
+24/05/2021 00:00;5473;MA_0251/18  /  ;Fournisseur 41;;MAD;Chef projet 16;345.678;Marché 72;3.733.821,00
+24/05/2021 00:00;5476;MA_0212/14  /  ;Fournisseur 42;;MAD;Chef projet 17;123.456;Marché 73;24.500,00
+24/05/2021 00:00;5477;MA_0195/17  /  ;Fournisseur 43;;USD;Chef projet 18;12.345;Marché 74;568.680,00
+24/05/2021 00:00;5478;MA_0200/17  /  ;Fournisseur 44;;USD;Chef projet 19;123.456;Marché 75;75.244,40
+24/05/2021 00:00;4959;MA_0113/17  /  ;Fournisseur 2;DP-01;MAD;Chef projet 1;123.456.789;Marché 1;49.382.715,60
