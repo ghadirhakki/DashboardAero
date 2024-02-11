@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, CreateView
 
 from core.forms import FileForm
 from finance.models import FinanceModel
+from planning.models import PhaseModel, ProjectModel, TaskModel
 
 # Create your views here.
 
@@ -24,6 +25,7 @@ def upload_file(request):
         if form.is_valid():
             csv_file = request.FILES.get("file")
             file_type = request.POST.get("type")
+            proj_ref = request.POST.get("project_ref")
 
             if not csv_file:
                 return HttpResponseBadRequest("Missing file")
@@ -55,6 +57,43 @@ def upload_file(request):
                         objet=row["OBJET"],
                         mt_reception=mt_recep,
                     )
+                form.save()
+
+            elif file_type == "PlanningFile":
+
+                csv_reader = csv.DictReader(
+                    csv_file.read().decode("latin-1").splitlines(), delimiter=","
+                )
+
+                for row in csv_reader:
+
+                    start_date = datetime.strptime(row["Start"], "%a %m/%d/%y").date()
+                    end_date = datetime.strptime(row["Finish"], "%a %m/%d/%y").date()
+
+                    if row["Outline Level"] == "0":
+                        current_proj, bool = ProjectModel.objects.get_or_create(
+                            reference=proj_ref,
+                            start=start_date,
+                            end=end_date,
+                        )
+
+                    elif row["Outline Level"] == "1":
+                        current_phase, bool = PhaseModel.objects.get_or_create(
+                            project_related=current_proj,
+                            name=row["Name"],
+                            start=start_date,
+                            end=end_date,
+                        )
+
+                    elif row["Outline Level"] >= "1":
+                        TaskModel.objects.create(
+                            project_related=current_proj,
+                            phase_related=current_phase,
+                            name=row["Name"],
+                            start=start_date,
+                            end=end_date,
+                        )
+
                 form.save()
 
     else:

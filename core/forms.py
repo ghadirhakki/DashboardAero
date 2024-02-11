@@ -8,7 +8,7 @@ from .models import FileModel
 class FileForm(forms.ModelForm):
     class Meta:
         model = FileModel
-        fields = ["type", "file"]
+        fields = ["type", "file", "project_ref"]
 
     def save(self, commit=True):
         instance = super().save(commit=False)
