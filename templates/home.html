@@ -1,5 +1,4 @@
-{% extends "_base.html" %} {% block title %}Home{% endblock title %} 
-
+{% extends "_base.html" %} {% block title %}Home{% endblock title %}
 
 {% block content %}
 
@@ -11,5 +10,16 @@
 <a href="{% url 'login' %}">Log In</a>
 {% endif %}
 
+<ul id="project-list">
+    <!-- Project items will be populated here dynamically -->
+</ul>
+
+<div id="phase-list">
+    <!-- Phase items will be populated here dynamically -->
+</div>
+
+<div id="task-list">
+    <!-- Task items will be populated here dynamically -->
+</div>
 
 {% endblock content %}
