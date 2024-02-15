@@ -9,44 +9,50 @@
 
   <!-- Chart JS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+{% load static %}
 
-  <!-- Axios -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <title>{% block title %}AeroDash{% endblock title %}</title>
   <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        li:hover {
-            background-color: #f0f0f0;
-        }
-        span {
-            color: blue;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        span:hover {
-            color: darkblue;
-        }
-    </style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background-color: #f0f0f0;
+    }
+
+    span {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    span:hover {
+      color: darkblue;
+    }
+  </style>
 </head>
 
 <body>
-  <div>
+  
     <header>
       <div class="nav-left">
         <h1><a href="{% url 'home' %}">Homepage</a></h1>
@@ -59,64 +65,8 @@
       </div>
     </header>
     {% block content %} {% endblock content %}
-  </div>
-  <script>
-    // Function to fetch and display tasks for a selected phase
-        function showTasks(reference, phaseId) {
-            fetch(`/projects/${reference}/tasks/`)
-                .then(response => response.json())
-                .then(data => {
-                    const taskList = document.getElementById('task-list');
-                    taskList.innerHTML = ''; // Clear previous content
-                    data.forEach(task => {
-                        const taskItem = document.createElement('div');
-                        taskItem.textContent = task.name;
-                        taskList.appendChild(taskItem);
-                    });
-                })
-                .catch(error => console.error('Error fetching tasks:', error));
-        }
-    function showPhases(reference) {
-      fetch(`/projects/${reference}/phases/`)
-        .then(response => response.json())
-        .then(data => {
-          const phaseList = document.getElementById('phase-list');
-          phaseList.innerHTML = ''; // Clear previous content
-          data.forEach(phase => {
-            const phaseItem = document.createElement('div');
-            phaseItem.textContent = phase.id;
-            phaseList.appendChild(phaseItem);
-          });
-        })
-        .catch(error => console.error('Error fetching phases:', error));
-    }
+  
 
-    // Function to fetch and display projects
-    function showProjects() {
-      fetch('/projects/')
-        .then(response => response.json())
-        .then(data => {
-          const projectList = document.getElementById('project-list');
-          projectList.innerHTML = ''; // Clear previous content
-          data.forEach(project => {
-            const projectItem = document.createElement('li');
-            const projectRef = document.createElement('span');
-
-            projectRef.textContent = project.reference;
-            projectRef.addEventListener('click', () => {
-              showPhases(project.reference);
-            });
-            projectItem.appendChild(projectRef);
-            projectList.appendChild(projectItem);
-
-          });
-        })
-        .catch(error => console.error('Error fetching projects:', error));
-    }
-
-    // Call the function to initially display projects
-    showProjects();
-  </script>
 </body>
 
 </html>

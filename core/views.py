@@ -4,7 +4,10 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from datetime import date
 
+
+from planning.views import proj_list
 from core.forms import FileForm
 from finance.models import FinanceModel, FinanceModelSerializer
 from planning.models import (
@@ -112,3 +115,53 @@ def dir_dashboard(request):
     if request.method == "GET":
         all_projects = ProjectModel.objects.all()
     return render(request, "dashboards/dir_dash.html", {"all_projects": all_projects})
+
+
+def phases_per_proj(request, ref):
+    if request.method == "GET":
+        proj = ProjectModel.objects.filter(reference=ref)
+        proj_phases = PhaseModel.objects.filter(project_related__reference=ref)
+        return render(
+            request,
+            "dashboards/proj_template.html",
+            {
+                "proj_phases": proj_phases,
+                "ref": ref,
+            },
+        )
+
+
+@api_view(["GET"])
+def chart_data(request, ref):
+    proj = ProjectModel.objects.filter(reference=ref).first()
+    today = date.today()
+
+    # Filter phases by project reference
+    proj_phases = PhaseModel.objects.filter(project_related__reference=ref)
+
+    # Determine current phase based on today's date and project start/end dates
+    current_phase = None
+    for phase in proj_phases:
+        if phase.start <= today <= phase.end:
+            current_phase = phase.name
+            break
+
+    # Find phases that have passed and phases that will follow
+    passed_phases = [phase.name for phase in proj_phases if phase.end < today]
+    upcoming_phases = [phase.name for phase in proj_phases if phase.start >= today]
+
+    if current_phase is not None:
+        upcoming_phases.append(current_phase)
+
+    chartLabel = "Graph avancement projet"
+    chartdata = [0, 25, 50, 75, 100]
+
+    data = {
+        "current_phase": current_phase,
+        "passed_phases": passed_phases,
+        "upcoming_phases": upcoming_phases,
+        "chartLabel": chartLabel,
+        "chartdata": chartdata,
+        "ref": ref,
+    }
+    return Response(data)
