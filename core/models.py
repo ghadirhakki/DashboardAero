@@ -5,7 +5,6 @@ from planning.models import ProjectModel
 FILE_CHOICES = (("BudgetFile", "Budget File"), ("PlanningFile", "Planning File"))
 
 
-# Create your models here.
 class FileModel(models.Model):
     type = models.CharField(max_length=20, choices=FILE_CHOICES)
     file = models.FileField(upload_to="files/")
@@ -21,7 +20,6 @@ class ImageModel(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # Add your custom fields here
     proj = models.ForeignKey(ProjectModel, on_delete=models.CASCADE)
 
 
