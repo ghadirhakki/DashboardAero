@@ -9,4 +9,9 @@ urlpatterns = [
         views.tasks_per_project,
         name="project_tasks",
     ),
+    path(
+        "projects/<str:ref>/phases/<str:phaseId>/tasks/",
+        views.tasks_per_phase,
+        name="phase_tasks",
+    ),
 ]

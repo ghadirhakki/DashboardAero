@@ -5,6 +5,10 @@ from .models import ProjectModel, PhaseModel, TaskModel
 # Register your models here.
 
 
-admin.site.register(ProjectModel)
+@admin.register(ProjectModel)
+class projmodelAdmin(admin.ModelAdmin):
+    list_display = ["reference", "name"]
+
+
 admin.site.register(PhaseModel)
 admin.site.register(TaskModel)

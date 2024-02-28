@@ -1,0 +1,122 @@
+{% extends "_base.html" %}
+
+{% load static %}
+{% load tags %}
+{% block content%}
+{% if request.user.is_authenticated and request.user|in_group:"Directeur" or request.user|in_group:"Chef de projets" %}
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col-12">
+      <div class="bg-light rounded h-100 p-4 ">
+        <div class="d-flex align-items-center justify-content-between ">
+          <p class="alert alert-success rounded-pill p-4 " style="font-size: 22px;"><strong>Phases du projet</strong>
+          </p>
+          <div class="ms-4 me-4">
+            <p class=" btn btn-outline-secondary rounded-pill m-2 text-dark align-items-start w-100"><strong>Phase en
+                cours</strong></p>
+            <p class=" btn btn-outline-secondary rounded-pill m-2 text-dark align-items-start  w-100"><strong>Tâche en
+                cours</strong></p>
+          </div>
+          <div class="me-4">
+            <p class="btn btn-success rounded-pill m-2 w-100  " id="current_phase"></p>
+            <p class="btn btn-success rounded-pill m-2 w-100 " id="current_task"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 ">
+      <!-- Use col-md-6 to make each list take half of the container width on medium screens and larger -->
+      <div class="bg-light rounded h-100 p-4">
+        <p class="alert alert-primary rounded-pill mt-4"><strong>Phases achevées</strong></p>
+        <ul id="passedPhasesList" class="phase-list p-4 "></ul>
+      </div>
+    </div><br><br>
+    <div class="col-md-6 ">
+      <!-- Use col-md-6 to make each list take half of the container width on medium screens and larger -->
+      <div class="bg-light rounded h-100 p-4">
+        <h6 class="alert alert-primary rounded-pill mt-4">Upcoming Phases</h6>
+        <ul id="upcomingPhasesList" class="phase-list p-4 mt-4"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal to display tasks -->
+<div class="modal fade" id="tasksModal" tabindex="-1" aria-labelledby="tasksModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tasksModalLabel">Tasks per Phase</h5>
+        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="phaseTasksList" class="phase-list p-4"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+
+    <div class="col-sm-12 col-md-6 col-xl-5 pb-4">
+      <div class="bg-light rounded h-100 p-4 d-flex flex-column justify-content-center">
+        <h6 class=" mb-4 text-center">Progrès valeur plannifiée {{ref}} </h6>
+        <div class="pg-bar mb-4">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+              <span id="progress-label"> %</span>
+            </div>
+          </div>
+        </div><br><br>
+        <h6 class=" mb-4 text-center">Progrès valeur acquise {{ref}} </h6>
+
+        <div class="pg-bar mb-4">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" aria-valuemin="0"
+              aria-valuemax="100" style="width: 0%;" id="new-progress-bar">
+              <span id="new-progress-label">%</span>
+            </div>
+          </div>
+        </div>
+        <div class=" mb-6">
+
+          <canvas id="projectChart" width="600" height="600"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-xl-7 mb-4">
+      <div class="bg-light rounded h-100 p-4">
+        <h5 class="mb-4 text-center">Suivi Valeur Acquise (dhs)</h5>
+        <canvas id="suivi_va"></canvas>
+        <canvas id="financialRecordsChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% else %}
+
+<div class="container-fluid">
+  <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+      <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h3 class="text-primary">AeroDash</h3>
+        </div>
+        <h6> Check your dashboard for specific insight</h6>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+
+
+{%endblock content%}

@@ -1,0 +1,25 @@
+{% extends "_base.html" %} 
+{% block content %}
+<div class="container-fluid pt-4 px-4">
+  <div class="bg-light rounded h-100 p-4">
+    <h4 class="mb-4">Img Upload </h4>
+    <form enctype="multipart/form-data" method="post" id="image_upload_form"> <!-- Added id to the form -->
+      {% csrf_token %}
+      <div class="row mb-3">
+        <label for="id_img" class="form-label">Image Upload</label>
+        <div class="col-sm-10">
+          <input type="file" required id="id_img" name="img" class="form-control" />
+        </div>
+      </div>
+      <div class="row mb-3" >
+        <label for="id_project_ref" class="form-label">Project Reference</label>
+        <div class="col-sm-10">
+          <input name="project_ref" placeholder="Format: MA_0321_09_" class="form-control" type="text" required id="id_project_ref" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submit_button">Submit</button> <!-- Changed type to button -->
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

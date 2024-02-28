@@ -1,0 +1,114 @@
+{% extends "_base.html" %}
+
+{% load static %}
+{% load tags %}
+{% block content%}
+{% if request.user.is_authenticated and request.user|in_group:"Technician" or request.user|in_group:"Chef de projets" %}
+<div class="container-fluid pt-4 px-4 mb-4">
+  <div class="row g-4">
+
+    <div class="col-md-4 h-auto">
+      <!-- Use col-md-6 to make each list take half of the container width on medium screens and larger -->
+      <div class="bg-light rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h5>Phases du projet</h5>
+        </div>
+        <h6 class="alert alert-primary ">Phases achevées</h6>
+        <ul id="passedPhasesList" class="phase-list p-2 rounded bg-white"></ul>
+        <h6 class="alert alert-primary ">Upcoming Phases</h6>
+        <ul id="upcomingPhasesList" class="phase-list p-2 rounded bg-white "></ul>
+      </div>
+    </div>
+    <div class="col-md-4 pt-4 h-auto">
+      <div class="alert alert-info  rounded d-flex ">
+        <div class="btn btn-outline-danger rounded w-100 d-flex  ">
+          <i class="bi bi-minecart-loaded fa-3x text-danger ms-3 me-5"></i>
+          <div class="ms-2">
+            <p class="mb-2 mt-2 ms-4 text-dark"><strong>Phase en cours</strong></p>
+            <p class="mb-0 w-100 text-dark" id="current_phase"></p>
+          </div>
+        </div>
+      </div><br>
+      <div class="alert alert-info rounded d-flex  ">
+        <div class="btn btn-outline-success rounded w-100 d-flex  ">
+
+          <i class="bi bi-check-circle fa-3x text-success ms-3"></i>
+          <div class="align-items-start">
+            <p class="mb-2 mt-2 text-dark ms-0 align-items-start"><strong>Tâche en cours</strong></p>
+            <p class="mb-0 w-100 ms-5 text-dark" id="current_task"></p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-light align-items-center rounded mt-6 p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h5 class="w-100">Tasks per Phase</h5>
+          <!-- Button for toggling tasks -->
+        </div>
+        <p id="noTasksMessage" style="display: block;">Select a phase to show tasks here.</p>
+        <ul id="phaseTasksList" class="phase-list p-4" style="display: none;"></ul> <!-- Hidden by default -->
+      </div>
+
+    </div>
+    <!-- Progress Chart -->
+    <div class=" col-md-4 ">
+
+      <div class="bg-light rounded p-4 d-flex flex-column justify-content-center mb-4">
+        <h6 class=" mb-4 text-center">Progrès projet {{ref}} </h6>
+        <div class="pg-bar mb-4">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+              <span id="progress-label"> %</span>
+            </div>
+          </div>
+        </div><br><br>
+
+        <div class=" mb-6">
+          <canvas id="projectChart" width="600" height="600"></canvas>
+        </div>
+      </div>
+      <div class="bg-light rounded mt-4 p-4">
+        <h4 class="mb-4">Img Upload </h4>
+        <form enctype="multipart/form-data" method="post" id="image_upload_form"> <!-- Added id to the form -->
+          {% csrf_token %}
+          <div class="row mb-3">
+            <label for="id_img" class="form-label">Image Upload</label>
+            <div class="col-sm-10">
+              <input type="file" required id="id_img" name="img" class="form-control" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="id_project_ref" class="form-label">Project Reference</label>
+            <div class="col-sm-10">
+              <input name="project_ref" placeholder="Format: MA_0321_09_" class="form-control" type="text" required
+                id="id_project_ref" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submit_button">Submit</button>
+          <!-- Changed type to button -->
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% else %}
+
+<div class="container-fluid">
+  <div class="row align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+      <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h3 class="text-primary">AeroDash</h3>
+        </div>
+        <h6> Check your dashboard for specific insight</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+
+{%endblock content%}

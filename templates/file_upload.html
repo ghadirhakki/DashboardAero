@@ -1,24 +1,52 @@
 {% extends "_base.html" %} 
-
-
 {% block content %}
-<h1>New File</h1>
-<form enctype="multipart/form-data" method="post">
-  {% csrf_token %}
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading">File Upload</div>
-      <div class="panel-body">
-        {% if error_message %}
-        <p class="bg-danger p-d ml-b">{{ error_message }}</p>
-        {% endif %}
-        <div class="col-md-6 col-md-offset-4">
-          {{ form }}
-          <br />
-          <button type="submit">Upload</button>
+<div class="container-fluid pt-4 px-4">
+  <div class="bg-light rounded h-100 p-4">
+    <h4 class="mb-4">File Upload </h4>
+    <form enctype="multipart/form-data" method="post" id="file_upload_form"> <!-- Added id to the form -->
+      {% csrf_token %}
+      <div class="row mb-3">
+        <label for="id_file" class="form-label">File input</label>
+        <div class="col-sm-10">
+          <input type="file" required id="id_file" name="file" class="form-control" />
         </div>
       </div>
-    </div>
+      <div class="row mb-3">
+        <label for="id_type">File Type</label>
+        <div class="col-sm-10">
+          <select class="form-select" required id="id_type" name="type">
+            <option value selected>---------------</option>
+            <option value="BudgetFile">Budget File</option>
+            <option value="PlanningFile">Planning File</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3" id="project_ref_field" style="display: none;">
+        <label for="id_project_ref" class="form-label">Project Reference</label>
+        <div class="col-sm-10">
+          <input name="project_ref" placeholder="Format: MA_0321_09_" class="form-control" type="text" required id="id_project_ref" />
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" id="submit_button">Submit</button> <!-- Changed type to button -->
+    </form>
   </div>
-</form>
+</div>
+
+<script>
+  // Function to show/hide project reference field based on selected file type
+  document.getElementById('id_type').addEventListener('change', function() {
+    var projectRefField = document.getElementById('project_ref_field');
+    if (this.value === 'PlanningFile') {
+      projectRefField.style.display = 'block';
+    } else {
+      projectRefField.style.display = 'none';
+    }
+  });
+
+  // Submit the form when submit button is clicked
+  document.getElementById('submit_button').addEventListener('click', function() {
+    document.getElementById('file_upload_form').submit();
+  });
+</script>
+
 {% endblock content %}

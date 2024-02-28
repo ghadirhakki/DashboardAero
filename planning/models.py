@@ -8,6 +8,7 @@ class ProjectModel(models.Model):
     name = models.CharField(max_length=80, blank=True)
     start = models.DateField()
     end = models.DateField()
+    cost = models.IntegerField(default=0, null=True)
 
 
 class ProjectModelSerializer(serializers.ModelSerializer):

@@ -1,0 +1,145 @@
+{% extends "_base.html" %}
+
+{% block title %} Director Dashboard{% endblock title%}
+
+{%block content%}
+
+{% load tags%}
+
+{% if request.user.is_authenticated and request.user|in_group:"Directeur" %}
+
+<div class="container-fluid pt-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-md-6 col-xl-4 align-items-center">
+            <div class="alert alert-success align-items-center rounded h-100 p-4">
+                <div class="align-items-center rounded ms-5 ps-5">
+                    <p class=" btn btn-outline-success text-center text-success" style=" font-size: larger;">
+                        <strong>Project Images</strong>
+                    </p>
+                </div>
+                <div class="rounded bg-white p-4  owl-carousel testimonial-carousel">
+                    {% for image in images %}
+                    <div class="testimonial-item text-center">
+                        <img class="img-fluid mx-auto mb-4" src="{{ image.img.url }}" style="width: 50%; height: 50%;"
+                            alt="Project Image">
+                        <h5 class="mb-1 text-center">{{ image.project_ref }}</h5>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-xl-4 h-100 pt-3 ">
+            <div class="alert alert-info rounded d-flex align-items-center ">
+                <div class="btn btn-outline-dark rounded w-100 d-flex align-items-center ">
+
+                    <i class="fa fa-chart-line fa-3x text-dark ms-3"></i>
+                    <div class="ms-5">
+                        <p class="mb-2"><strong>N° projets en cours</strong></p>
+                        <h6 class="mb-0">{{total_projects}}</h6>
+                    </div>
+                </div>
+            </div><br>
+            <div class="alert alert-info rounded d-flex align-items-center ">
+                <div class="btn btn-outline-danger rounded w-100 d-flex align-items-center ">
+
+                    <i class="bi bi-exclamation-circle fa-3x text-danger ms-3"></i>
+                    <div class="ms-5">
+                        <p class="mb-2 text-dark"><strong>N° projets en retard</strong></p>
+                        <h6 class="mb-0">{{num_proj_retard}}</h6>
+                    </div>
+                </div>
+            </div><br>
+            <div class="alert alert-info rounded d-flex align-items-center ">
+                <div class="btn btn-outline-success rounded w-100 d-flex align-items-center ">
+
+                    <i class="bi bi-check-circle fa-3x text-success ms-3"></i>
+                    <div class="ms-5">
+                        <p class="mb-2 text-dark"><strong>N° projets sans retard</strong></p>
+                        <h6 class="mb-0">{{num_proj_sans_retard}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class=" alert alert-success h-100 rounded p-4 ">
+                <div class="d-flex align-items-center justify-content-between ms-4">
+                    <div class="align-items-center rounded ms-5 ps-5">
+                        <p class=" btn btn-outline-success text-center text-success" style=" font-size: larger;">
+                            <strong>Calender</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="rounded bg-white p-4" id="calender"></div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="container-fluid pt-4 ">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-80 p-4 ">
+                <div class="d-flex align-items-center justify-content-between ">
+                    <div class="align-items-center rounded">
+                        <p class=" btn btn-outline-dark text-center text-dark mt-2 ms-2" style=" font-size: larger;">
+                            <strong>List
+                                of projects</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="table-responsive m-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-dark" style=" font-size: larger;" scope="col">Reference</th>
+                                <th class="text-dark" style=" font-size: larger;" scope="col">Name</th>
+                                <th class="text-dark" style=" font-size: larger;" scope="col">Start</th>
+                                <th class="text-dark" style=" font-size: larger;" scope="col">End (planned)</th>
+                                <th class="text-dark" style=" font-size: larger;" scope="col">Cost</th>
+                                <th class="text-dark" style=" font-size: larger;" scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for proj in all_projects%}
+                            <tr>
+                                <td class="text-dark">{{proj.reference}}</td>
+                                <td class="text-dark">{{proj.name}}</td>
+                                <td class="text-dark">{{proj.start}}</td>
+                                <td class="text-dark">{{proj.end}}</td>
+                                <td class="text-dark">{{proj.cost}}</td>
+                                <td>
+                                    <div class="btn btn-outline-primary"><a
+                                            href="/proj_details/{{proj.reference}}/">Details</a></div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+{% else %}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary">AeroDash</h3>
+                </div>
+                <h6> Check your dashboard for specific insight </h6>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{%endblock content%}

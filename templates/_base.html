@@ -2,71 +2,560 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <title>AeroDash</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  {% load static %}
+  {% load tags %}
+
   <!-- Chart JS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
 
   <!-- Chart JS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
-{% load static %}
 
 
-  <title>{% block title %}AeroDash{% endblock title %}</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
 
-    h1 {
-      margin-bottom: 20px;
-    }
+  <!-- Favicon -->
+  <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    li {
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    li:hover {
-      background-color: #f0f0f0;
-    }
+  <!-- Libraries Stylesheet -->
+  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css'%}" rel="stylesheet" />
 
-    span {
-      color: blue;
-      text-decoration: underline;
-      cursor: pointer;
-    }
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
 
-    span:hover {
-      color: darkblue;
-    }
-  </style>
+  <!-- Template Stylesheet -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 
 <body>
-  
-    <header>
-      <div class="nav-left">
-        <h1><a href="{% url 'home' %}">Homepage</a></h1>
-      </div>
-      <div class="nav-right">
-        <a href="{% url 'file_upload' %}">+ Upload File</a>
-      </div>
-      <div class="nav-right">
-        <a href="{% url 'dir_dashboard' %}">Director Dashboard</a>
-      </div>
-    </header>
-    {% block content %} {% endblock content %}
-  
+  <div class="container-fluid position-relative bg-white d-flex p-0">
+    <!-- Sidebar Start -->
+    <div class="sidebar ">
+      <nav class="navbar bg-white navbar-light  p-0 ">
+        <div class="ms-2 align-items-center w-100 me-2">
+          <div class=" alert alert-primary align-items-center  mt-1">
+            <h3 class=" text-center pt-2 text-primary "> AeroDash</h3>
+          </div>
 
+        </div>
+        <div id="alertsContainer" class=" align-items-center me-2 ms-2">
+          {% for a in alerts %}
+          <button class="alert alert-danger w-100 me-4" type="button"><strong>{{a.proj_related.name}}
+              {{a.msg}}</strong>
+            <div class="progress mt-2">
+              <div class=" progress-bar-striped bg-warning" role="progressbar" aria-valuenow="{{a.va}}"
+                aria-valuemin="0" aria-valuemax="100" style="width: {{a.va}}%; "><span class="text-danger "><strong>VA
+                    :{{a.va}}% </strong></span>
+              </div>
+              <div class="p progress-bar-striped bg-success" role="progressbar" aria-valuenow="{{a.vp}}"
+                aria-valuemin="0" aria-valuemax="100" style="width: {{a.vp}}%; "><span class="text-white "><strong>VP
+                    :{{a.vp}}% </strong></span>
+              </div>
+            </div>
+          </button>
+
+          {% endfor %}
+          <!-- <button class="btn btn-warning w-100 m-2" type="button">Alerte 2</button>
+              <button type="button" class="btn btn-danger w-100 m-2">Alerte 3</button>
+              <button id="alertButton" class="btn btn-warning w-100 m-2" type="button">Alerte 4</button> -->
+
+        </div>
+        <div class="btn rounded mb-2 w-100 me-2 ">
+          <div class="navbar-nav w-100 align-items-start ">
+            <a href="{% url 'login' %}" class="nav-item nav-link"><button type="button"
+                class="btn btn-sm btn-lg-square btn-outline-primary me-2"><i class="bi bi-unlock-fill"></i></button>Log
+              In /
+              Out</a>
+            <a href="{% url 'file_upload' %}" class="nav-item nav-link"><button type="button"
+                class="btn btn-sm btn-lg-square btn-outline-primary me-2"><i class="bi bi-cloud-upload "></i></button>+
+              Upload
+              File</a>
+            <a href="{% url 'image_upload' %}" class="nav-item nav-link"><button type="button"
+                class="btn btn-sm btn-lg-square btn-outline-primary me-2"><i class="bi bi-card-image "></i></button>+
+              Upload
+              Image</a>
+            <a href="{% url 'dir_dashboard' %}" class="nav-item nav-link"><button type="button"
+                class="btn btn-sm btn-lg-square btn-outline-primary me-2"><i
+                  class="fa fa-tachometer-alt "></i></button>Dir
+              Dashboard</a>
+            <a href="{% url 'cp_dashboard' %}" class="nav-item nav-link"><button type="button"
+                class="btn btn-sm btn-lg-square btn-outline-primary me-2"><i class="fa fa-chart-bar "></i></button>CP
+              Dashboard</a>
+            <a href="{% url 'tech_dashboard' %}" class="nav-item nav-link"><button type="button"
+                class="btn btn-sm btn-lg-square btn-outline-primary me-2"><i class="bi bi-geo "></i></button>Tech
+              Dashboard</a>
+          </div>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="ms-4 ps-4 w-100 align-items-center">
+          <h6 class=" btn btn-sm btn-outline-primary  ms-2  me-2"> <br><i class="fa fa-home me-3"></i>You're logged in
+            as
+            <br>
+            <p class="mt-2" style="font-weight: bold"> {{ user.username }}!</p>
+          </h6>
+          {% else %}
+          <h6 class=" btn btn-outline-primary pb-4 ms-2  me-2"> <br><i class="fa fa-home me-3"></i>You are not logged in
+            <br>
+          </h6>
+          {% endif %}
+        </div>
+      </nav>
+    </div>
+    <!-- Sidebar End -->
+
+
+    <!-- Content Start -->
+    <div class="content col-12">
+
+      {% block content %} {% endblock content %}
+
+    </div>
+    <!-- Content End -->
+
+
+    <!-- Back to Top -->
+    <a href="img_upload.html" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+        class="bi bi-arrow-up"></i></a>
+
+  </div>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'lib/chart/chart.min.js'%}"></script>
+  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+  <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+  <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+  <!-- Template Javascript -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <script>
+
+    fetch("/chart_proj_pie/{{ref}}/")
+      .then((response) => response.json())
+      .then((data) => {
+        const passedPhases = data.passed_phases;
+        const upcomingPhases = data.upcoming_phases;
+        const totalPhases = data.total_phases;
+        const Phases = data.phases;
+        const current_phase = data.current_phase;
+        const current_task = data.current_task
+        const passedPercentage = data.passed_percentage;
+        const upcomingPercentage = data.upcoming_percentage;
+
+        
+        const p = document.getElementById("current_task");
+        p.textContent = current_task;
+
+        const p_d = document.getElementById("current_phase");
+        p_d.textContent = current_phase;
+        
+
+        const ctx = document.getElementById("projectChart").getContext("2d");
+        const chart = new Chart(ctx, {
+          type: "pie",
+          data: {
+            labels: [
+              "Passed Phases (" +
+              passedPercentage.toFixed(2) +
+              "% | " +
+              passedPhases.length +
+              " phases)",
+              "Upcoming Phases (" +
+              upcomingPercentage.toFixed(2) +
+              "% | " +
+              upcomingPhases.length +
+              " phases)",
+            ],
+            datasets: [
+              {
+                label: "Project Phases",
+                data: [passedPercentage, upcomingPercentage],
+                backgroundColor: [
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                ],
+                borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              title: {
+                display: true,
+                text: "Project : {{ref}}",
+              },
+            },
+          },
+        });
+        //progress Bar
+        const progressBar = document.querySelector('.progress-bar');
+        progressBar.setAttribute('aria-valuenow', passedPercentage);
+        progressBar.style.width = passedPercentage + '%';
+
+        const progressLabel = document.getElementById('progress-label');
+        progressLabel.textContent = passedPercentage.toFixed(2) + '%';
+
+
+        //all _phases :
+
+        // Select the <ul> element to append  phases
+        const passedPhasesList = document.getElementById("passedPhasesList");
+
+
+        // Clear any existing content in the list
+        passedPhasesList.innerHTML = "";
+
+        // Iterate over each upcoming phase and create <li> elements to display them
+        passedPhases.forEach(phase => {
+          const li = document.createElement("li");
+          li.textContent = phase; // Assuming phase is a string representing the phase name
+          const phase_Id = Phases[phase];
+          li.dataset.phaseId = phase_Id; // Assuming 'id' is the unique identifier for each phase
+          li.classList.add("btn", "btn-sm", "btn-outline-primary", "m-1", "w-100"); // Adding classes for styling
+          li.style.fontWeight = "bold"; // Make the text bold
+
+
+          passedPhasesList.appendChild(li);
+        });
+
+        // Select the <ul> element to append upcoming phases
+        const upcomingPhasesList = document.getElementById("upcomingPhasesList");
+
+
+        // Clear any existing content in the list
+        upcomingPhasesList.innerHTML = "";
+
+        // Iterate over each upcoming phase and create <li> elements to display them
+        upcomingPhases.forEach(phase => {
+          const li = document.createElement("li");
+          li.textContent = phase; // Assuming phase is a string representing the phase name
+          const phase_Id = Phases[phase];
+          li.dataset.phaseId = phase_Id; // Assuming 'id' is the unique identifier for each phase
+          li.classList.add("btn", "btn-sm", "btn-outline-primary", "m-1", "w-100"); // Adding classes for styling
+          li.style.fontWeight = "bold"; // Make the text bold
+
+
+          upcomingPhasesList.appendChild(li);
+        });
+        //line Chart :
+
+        const proj_end = data.proj_end;
+        const phases_start = data.phases_start;
+        const phases_cost = data.phases_cost;
+
+        phases_start.push(proj_end);
+        const labels = phases_start
+
+        // Initialize an empty array to store cumulative costs
+        const cumulativeCosts = [];
+
+        // Initialize a variable to keep track of the cumulative cost
+        let totalCost = 0;
+
+        // Iterate over the keys (phase names) of phases_cost
+        for (const phaseName in phases_cost) {
+          if (phases_cost.hasOwnProperty(phaseName)) {
+            // Get the data (date and cost) for the current phase
+            const phaseData = phases_cost[phaseName];
+            const phaseCost = phaseData.cost;
+
+            // Accumulate the current phase's cost to the total cost
+            totalCost += phaseCost;
+
+            // Add an object to cumulativeCosts representing the cumulative cost at this phase
+            cumulativeCosts.push({ phase: phaseName, cost: totalCost });
+          }
+        }
+
+
+        // Add the project cost at the end of cumulativeCosts
+        const projectCost = cumulativeCosts[cumulativeCosts.length - 1].cost;
+
+        const data_vp = cumulativeCosts.map(phase => phase.cost);
+        data_vp.unshift(0);
+
+
+        var ctx2 = $("#suivi_va").get(0).getContext("2d");
+        var myChart2 = new Chart(ctx2, {
+          type: "line",
+          data: {
+            labels: labels,
+            datasets: [{
+              label: "Valeur planifiée",
+              data: data_vp,
+              backgroundColor: "rgba(0, 156, 255, .5)",
+              fill: true
+            },
+            ]
+          },
+          options: {
+            responsive: true
+          }
+        });
+
+        // Extract dates and costs from fin_records
+        const finRecordsDates = Object.values(data.fin_records).map(record => record.date);
+        const finRecordsCosts = Object.values(data.fin_records).map(record => record.cost);
+
+
+        // Initialize an empty array to store cumulative costs for financial records
+        const cumulativeFinCosts = [];
+
+        // Initialize a variable to keep track of the cumulative cost
+        let totalFinCost = 0;
+
+        // Iterate over financial records and calculate cumulative costs
+        finRecordsCosts.forEach(cost => {
+          totalFinCost += cost;
+          cumulativeFinCosts.push(totalFinCost);
+        });
+
+        // Add the project cost at the end of cumulativeFinCosts
+        const projectFinCost = cumulativeFinCosts[cumulativeFinCosts.length - 1];
+
+        // Define the data for the financial records line chart
+        const data_fin_records = cumulativeFinCosts;
+
+        // Update progress bar
+        function updateProgressBar(progressPercentage) {
+          const progressBar = document.getElementById('new-progress-bar');
+          const progressLabel = document.getElementById('new-progress-label');
+
+          progressBar.style.width = progressPercentage + '%';
+          progressLabel.textContent = progressPercentage.toFixed(2) + '%';
+        }
+
+        totalFinCostper = (totalFinCost / projectCost) * 100
+
+        // Example usage:
+        updateProgressBar(totalFinCostper); // Updates progress bar to 50%
+
+
+
+        // Create the financial records line chart
+        var ctx3 = $("#financialRecordsChart").get(0).getContext("2d");
+        var myChart3 = new Chart(ctx3, {
+          type: "line",
+          data: {
+            labels: finRecordsDates,
+            datasets: [{
+              label: "Valeur acquise ",
+              data: data_fin_records,
+              backgroundColor: "rgba(255, 99, 132, 0.5)",
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 1,
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true
+          }
+        });
+
+
+        $(document).ready(function () {
+          $(".testimonial-carousel").owlCarousel({
+            loop: true,
+            margin: 10,
+            responsive: {
+              0: {
+                items: 1
+              },
+              600: {
+                items: 3
+              },
+              1000: {
+                items: 5
+              }
+            }
+          });
+        });
+
+        
+
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+
+
+  </script>
+  <script>
+    // Add event listeners to phase lists
+    document.querySelectorAll('.phase-list').forEach(list => {
+      list.addEventListener('click', event => {
+        const phaseId = event.target.dataset.phaseId; // Assuming phaseId is stored as a data attribute in the phase element
+        if (phaseId) {
+          // Fetch tasks for the phase using phaseId
+          fetchTasksForPhase(phaseId);
+        }
+      });
+    });
+    
+
+    // Select the container where you want to add the new button by its id
+    const alertContainer = document.getElementById('alertsContainer');
+
+    // Compare totalFinCostper with passedPercentage
+    if (totalFinCostper < passedPercentage) {
+      // Create a new button element
+      const newButton = document.createElement('button');
+      newButton.classList.add('btn', 'btn-warning', 'w-100', 'm-2');
+      newButton.type = 'button';
+
+      // Append the new button to the container
+      alertContainer.appendChild(newButton);
+    }
+  </script>
+
+  {% if request.user.is_authenticated and request.user|in_group:"Directeur" %}
+  <script>
+    // Function to fetch tasks for a phase
+    function fetchTasksForPhase(phaseId) {
+      // Get the project reference from the URL
+      const projectRef = window.location.pathname.split('/')[2]; // Assumes the project reference is the second part of the URL
+
+      // Perform fetch request to fetch tasks for the phase
+      fetch(`/projects/${projectRef}/phases/${phaseId}/tasks/`)
+        .then(response => response.json())
+        .then(data => {
+          // Display tasks in the modal
+          const phaseTasksList = document.getElementById("phaseTasksList");
+          phaseTasksList.innerHTML = "";
+          if (data.length > 0) {
+            data.forEach(task => {
+              const li = document.createElement("li");
+              li.textContent = task.name + " : " + task.end;
+              li.classList.add("btn", "btn-sm", "btn-outline-secondary", "m-1", "w-100"); // Adding classes for styling
+
+              phaseTasksList.appendChild(li);
+            });
+          } else {
+            // Show a message if the list of tasks is empty
+            const li = document.createElement("li");
+            li.textContent = "No tasks found for this phase.";
+            phaseTasksList.appendChild(li);
+          }
+          // Show the modal
+          const tasksModal = new bootstrap.Modal(document.getElementById('tasksModal'));
+          tasksModal.show();
+        })
+        .catch(error => console.error("Error fetching tasks:", error));
+    }
+  </script>
+
+  {% elif request.user.is_authenticated and request.user|in_group:"Chef de projets"%}
+  <script>
+    // Function to fetch tasks for a phase
+    function fetchTasksForPhase(phaseId) {
+      // Get the project reference from the URL
+      const projectRef = window.location.pathname.split('/')[2]; // Assumes the project reference is the second part of the URL
+
+      // Perform fetch request to fetch tasks for the phase
+      fetch(`/projects/{{ref}}/phases/${phaseId}/tasks/`)
+        .then(response => response.json())
+        .then(data => {
+          // Display tasks in the modal
+          const phaseTasksList = document.getElementById("phaseTasksList");
+          phaseTasksList.innerHTML = "";
+          if (data.length > 0) {
+            data.forEach(task => {
+              const li = document.createElement("li");
+              li.textContent = task.name + " : " + task.end;
+              li.classList.add("btn", "btn-sm", "btn-outline-secondary", "m-1", "w-100"); // Adding classes for styling
+              phaseTasksList.appendChild(li);
+            });
+          } else {
+            // Show a message if the list of tasks is empty
+            const li = document.createElement("li");
+            li.textContent = "No tasks found for this phase.";
+            phaseTasksList.appendChild(li);
+          }
+          // Show the modal
+          const tasksModal = new bootstrap.Modal(document.getElementById('tasksModal'));
+          tasksModal.show();
+        })
+        .catch(error => console.error("Error fetching tasks:", error));
+    }
+  </script>
+  {% elif request.user.is_authenticated and request.user|in_group:"Technician"%}
+  <script>
+
+    // JavaScript for displaying tasks when a phase is clicked
+    document.querySelectorAll('.phase').forEach(phase => {
+      phase.addEventListener('click', () => {
+
+        // Get phase ID
+        const phaseId = phase.dataset.phaseId;
+
+        // Call your fetchTasksForPhase function with the phase ID
+        fetchTasksForPhase(phaseId);
+
+      });
+    });
+
+    
+    // Function to fetch tasks for a phase
+    function fetchTasksForPhase(phaseId) {
+      // Perform fetch request to fetch tasks for the phase
+      fetch(`/projects/{{ref}}/phases/${phaseId}/tasks/`)
+        .then(response => response.json())
+        .then(data => {
+          // Display tasks directly
+          const phaseTasksList = document.getElementById("phaseTasksList");
+          phaseTasksList.innerHTML = "";
+          if (data.length > 0) {
+            data.forEach(task => {
+              const liName = document.createElement("p");
+              liName.textContent = task.name;
+              liName.classList.add("btn", "btn-sm", "btn-outline-secondary","text-dark", "mb-2", "w-100"); // Adding classes for styling
+              liName.style.fontWeight = "bold"; // Make the text bold
+              phaseTasksList.appendChild(liName);
+
+              const liDeadline = document.createElement("li");
+              liDeadline.textContent = "Deadline: " + task.end;
+              liDeadline.classList.add("btn", "btn-sm", "btn-success", "ms-4", "mb-4",);
+              liDeadline.style.float="right"; // Adding classes for styling
+
+              phaseTasksList.appendChild(liDeadline);
+
+            });
+          } else {
+            // Show a message if the list of tasks is empty
+            const li = document.createElement("li");
+            li.textContent = "No tasks found for this phase.";
+            phaseTasksList.appendChild(li);
+          }
+          // Show the tasks section
+          phaseTasksList.style.display = 'block';
+        })
+        .catch(error => console.error("Error fetching tasks:", error));
+    }
+
+  </script>
+
+  {% endif%}
 </body>
+
 
 </html>

@@ -31,12 +31,18 @@ def phases_per_proj(request, ref):
         return Response(serializer.data)
 
 
-@api_view()
+@api_view(["GET"])
 def tasks_per_project(request, ref):
-    if request.method == "GET":
-        project_phases = PhaseModel.objects.filter(project_related__reference=ref)
-        phase_serializer = PhaseModelSerializer(project_phases, many=True)
-        phase_tasks = TaskModel.objects.filter(project_related__reference=ref)
-        task_serializer = TaskModelSerializer(phase_tasks, many=True)
-        response_data = {"phases": phase_serializer.data, "tasks": task_serializer.data}
-        return Response(response_data)
+    project_phases = PhaseModel.objects.filter(project_related__reference=ref)
+    phase_tasks = TaskModel.objects.filter(project_related__reference=ref)
+    data = {"phases": project_phases, "tasks": phase_tasks}
+    return Response(data)
+
+
+@api_view(["GET"])
+def tasks_per_phase(request, ref, phaseId):
+    phase_tasks = TaskModel.objects.filter(
+        project_related__reference=ref, phase_related=phaseId
+    )
+    serializer = TaskModelSerializer(phase_tasks, many=True)
+    return Response(serializer.data)
